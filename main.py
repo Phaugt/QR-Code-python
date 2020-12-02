@@ -28,10 +28,6 @@ appbg = resource_path("./gui/app.png")
 savedcodes = resource_path("./saved/")
 
 
-#QR.png('pythonexplained.png', scale =  10)
-
-
-
 class GUI(QMainWindow):
     def __init__(self):
         super(GUI, self).__init__()
