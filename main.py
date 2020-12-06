@@ -56,8 +56,8 @@ class GUI(QMainWindow):
             elif self.barbox.isChecked():
                 if QRText != "":
                     barout = Code128(QRText, writer=ImageWriter())
-                    barout.save("saved/"+QRText+"-bar")
-                    image = QPixmap("saved/"+QRText+"-bar"+".png")
+                    barout.save(savedcodes+QRText+"-bar")
+                    image = QPixmap(savedcodes+QRText+"-bar"+".png")
                     qrscaled = image.scaled(261, 261, Qt.KeepAspectRatio)
                     self.qrcode.setPixmap(qrscaled)
         
