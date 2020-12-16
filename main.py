@@ -3,10 +3,13 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow,
             QMessageBox, QLabel, qApp, QPushButton, QRadioButton)
 from PyQt5.QtCore import (QFile, Qt)
 from PyQt5.QtGui import (QIcon, QPixmap)
+import barcode
+import PIL
 from barcode import Code128
 from barcode.writer import ImageWriter
 import pyqrcode
 import png, os, sys
+from os.path import expanduser
 from pyqrcode import QRCode
 
 try:
@@ -25,7 +28,8 @@ def resource_path(relative_path):
 qrgui = resource_path("./gui/main.ui")
 qrlogo = resource_path("./gui/logo.png")
 appbg = resource_path("./gui/app.png")
-savedcodes = resource_path("./saved/")
+userfold = expanduser("~")
+savedcodes = (userfold+"/Pictures/")
 
 
 class GUI(QMainWindow):
@@ -55,6 +59,7 @@ class GUI(QMainWindow):
 
             elif self.barbox.isChecked():
                 if QRText != "":
+
                     barout = Code128(QRText, writer=ImageWriter())
                     barout.save(savedcodes+QRText+"-bar")
                     image = QPixmap(savedcodes+QRText+"-bar"+".png")
@@ -64,7 +69,7 @@ class GUI(QMainWindow):
         except Exception:
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Warning)
-            msgBox.setWindowTitle("codegenerator")
+            msgBox.setWindowTitle("Code Generator")
             msgBox.setText("Error! code could not be created")
             msgBox.exec()
 
